@@ -2,7 +2,8 @@
 var ssnComfortSupportName = "SsnComfortSupportPlugin";
 
 var ssncomfortsupport = {
-  openSettingsApp: function(successCallback, errorCallback) {
+	
+	openSettingsApp: function(successCallback, errorCallback) {
 		cordova.exec(successCallback, errorCallback, ssnComfortSupportName, "openSettingsApp", []); 
 	},
 	getWifiName: function(successCallback, errorCallback) {
@@ -32,4 +33,5 @@ var ssncomfortsupport = {
 		}]); 
 	}*/
 }
+
 module.exports = ssncomfortsupport;
