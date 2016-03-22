@@ -1,2 +1,2 @@
 # cordova-plugin-ssncomfortsupport
-Cordova plugin with support to the SenseSoft Notifications Comfort app
+Cordova plugin supporting the SenseSoft Notifications Comfort app
