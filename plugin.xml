@@ -4,7 +4,7 @@
     <engine name="cordova" version=">=3.0.0" />
   </engines>
   <name>SenseSoft Notifications Comfort Support</name>
-  <description>Support plugin for the SenseSoft Notifications Comfort app</description>
+  <description>Support plugin to the SenseSoft Notifications Comfort app</description>
   <author>Sensible Solutions</author>
   <keywords>sensible solutions,sensesoft,cordova</keywords>
   <license>No license</license>
