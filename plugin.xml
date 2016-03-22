@@ -11,7 +11,7 @@
   <js-module src="www/ssncsupport.js" name="SsncComfortSupport">
     <clobbers target="window.ssncsupport" />
   </js-module>
-  <asset src="www/res" target="res" />
+  <!-- <asset src="www/res" target="res" /> -->		<!-- Directory to be copied to the Cordova app's www directory -->
   <platform name="android">
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="SsncComfortSupportPlugin">
