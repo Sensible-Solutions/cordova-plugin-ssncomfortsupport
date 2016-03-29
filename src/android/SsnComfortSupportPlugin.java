@@ -30,6 +30,9 @@ import android.content.DialogInterface;		  	// For showing debug messaages
 
 public class SsnComfortSupportPlugin extends CordovaPlugin
 {
+	// General variables
+	private final boolean mDEBUG = true;		// Debug flag, setting to true will show debug message boxes
+	
  	// General callback variables
 	//private CallbackContext serverRunningCallbackContext = null;
 	
@@ -92,7 +95,9 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	
 	private void openSettingsAppAction(CallbackContext callbackContext)
 	{
-	
+		JSONObject returnObj = new JSONObject();
+		
+		
 	}
 	
 	private void getWifiNameAction(CallbackContext callbackContext)
@@ -112,6 +117,22 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 		}
 		catch (JSONException e) { 
 			/* Ignore */ 
+		}
+	}
+	
+	private void showDebugMsgBox(String message)
+	{
+		if (mDEBUG) {
+			AlertDialog.Builder debugAlert  = new AlertDialog.Builder(cordova.getActivity());
+			debugAlert.setMessage(message);
+			debugAlert.setTitle("Debug SsnComfortPlugin");
+			debugAlert.setCancelable(false);
+			debugAlert.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int id) {
+					dialog.dismiss();
+				}
+			});
+			debugAlert.create().show();
 		}
 	}
 }
