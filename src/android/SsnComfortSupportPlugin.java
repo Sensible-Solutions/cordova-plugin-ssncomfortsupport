@@ -37,7 +37,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	private final boolean mDEBUG = true;		// Debug flag, setting to true will show debug message boxes
 	
  	// General callback variables
-	//private CallbackContext serverRunningCallbackContext = null;
+	private CallbackContext openSettingsAppCallbackContext = null;
 	
 	// Action Name Strings
 	private final static String OPEN_SETTINGS_APP = "openSettingsApp";
@@ -99,6 +99,9 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	private void openSettingsAppAction(CallbackContext callbackContext)
 	{
 		JSONObject returnObj = new JSONObject();
+		
+		// Save the callback context for open the settings app
+		openSettingsAppCallbackContext = callbackContext;
 		
 		// See http://developer.android.com/intl/vi/reference/android/provider/Settings.html for activity actions
 		//startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS));
