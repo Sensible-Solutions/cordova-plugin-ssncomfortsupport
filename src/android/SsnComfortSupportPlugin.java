@@ -171,4 +171,51 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 			debugAlert.create().show();
 		}
 	}
+	
+	
+	/*****************************************************************************************************
+	* Cordova Plugin (see CordovaPlugin.java)
+	*****************************************************************************************************/
+	
+	/*@override
+	 protected void pluginInitialize() {
+	 	// Called after plugin construction and fields have been initialized
+	 	super.pluginInitialize();
+	 }
+	
+	@Override
+	public void onDestroy() {
+		 // The final call you receive before your activity is destroyed
+		super.onDestroy();
+	}
+	
+	@override
+	 public void onStart() {
+		 // Called when the activity is becoming visible to the user
+		 super.onStart();
+    }
+	@override
+	 public void onStop() {
+		 // Called when the activity is no longer visible to the user
+		 super.onStop();
+    }
+	
+	@Override
+	public void onPause(boolean multitasking) {
+		// Called when the system is about to start resuming a previous activity
+		super.onPause(multitasking);
+    }
+	
+	@Override
+	public void onResume(boolean multitasking) {
+		// Called when the activity will start interacting with the user
+		super.onResume(multitasking);
+    }
+	
+	@Override
+    public void onReset() {
+		// Called when the WebView does a top-level navigation or refreshes
+		// Plugins should stop any long-running processes and clean up internal state
+		super.onReset();
+    }*/
 }
