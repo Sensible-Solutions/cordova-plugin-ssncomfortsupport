@@ -22,7 +22,7 @@ import android.content.Context;
 //import android.app.NotificationManager;
 //import android.R;
 import android.app.AlertDialog;			        // For showing debug messaages
-import android.content.DialogInterface;		  // For showing debug messaages
+import android.content.DialogInterface;		  	// For showing debug messaages
 
 //import java.util.ArrayList;
 //import java.util.List;
@@ -30,7 +30,7 @@ import android.content.DialogInterface;		  // For showing debug messaages
 
 public class SsnComfortSupportPlugin extends CordovaPlugin
 {
- // General callback variables
+ 	// General callback variables
 	//private CallbackContext serverRunningCallbackContext = null;
 	
 	// Action Name Strings
@@ -51,11 +51,32 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	private final static String errorGetWifiName = "wifiName";
 	
 	// Error Messages
- //private final static String logServerAlreadyRunning = "GATT server is already running";
+ 	//private final static String logServerAlreadyRunning = "GATT server is already running";
 	//private final static String logService = "Immediate Alert service could not be added";
 	//private final static String logConnectionState = "Connection state changed with error";
 	//private final static String logStateUnsupported = "BLE is not supported by device";
 	//private final static String logStatePoweredOff = "BLE is turned off for device";
 	
-	
+	//Actions
+	@Override
+	public boolean execute(String action, final JSONArray args, final CallbackContext callbackContext) throws JSONException
+	{
+		try {
+			if (OPEN_SETTINGS_APP.equals(action)) { 
+				openSettingsAppAction(callbackContext);
+				return true;
+			}
+			else if (GET_WIFI_NAME.equals(action)){
+				getWifiNameAction(callbackContext);
+				return true;
+			}
+			callbackContext.error("Invalid action");
+			return false;
+		} 
+		catch(Exception ex) {
+			System.err.println("Exception: " + ex.getMessage());
+			callbackContext.error(ex.getMessage());
+			return false;
+		} 
+	}
 }
