@@ -57,6 +57,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	//private final static String logStateUnsupported = "BLE is not supported by device";
 	//private final static String logStatePoweredOff = "BLE is turned off for device";
 	
+	
 	//Actions
 	@Override
 	public boolean execute(String action, final JSONArray args, final CallbackContext callbackContext) throws JSONException
@@ -78,5 +79,15 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 			callbackContext.error(ex.getMessage());
 			return false;
 		} 
+	}
+	
+	private void openSettingsAppAction(CallbackContext callbackContext)
+	{
+	
+	}
+	
+	private void getWifiNameAction(CallbackContext callbackContext)
+	{
+	
 	}
 }
