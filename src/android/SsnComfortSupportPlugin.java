@@ -64,18 +64,25 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	{
 		try {
 			if (OPEN_SETTINGS_APP.equals(action)) { 
-				openSettingsAppAction(callbackContext);
+				cordova.getThreadPool().execute(new Runnable() {
+					public void run() {
+						openSettingsAppAction(args, callbackContext);
+					}
+				});
 				return true;
 			}
-			else if (GET_WIFI_NAME.equals(action)){
-				getWifiNameAction(callbackContext);
+			else if (GET_WIFI_NAME.equals(action)) {
+				cordova.getThreadPool().execute(new Runnable() {
+					public void run() {
+						getWifiNameAction(args, callbackContext);
+					}
+				});
 				return true;
 			}
 			callbackContext.error("Invalid action");
 			return false;
 		} 
 		catch(Exception ex) {
-			System.err.println("Exception: " + ex.getMessage());
 			callbackContext.error(ex.getMessage());
 			return false;
 		} 
