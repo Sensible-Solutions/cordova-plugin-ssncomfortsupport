@@ -19,7 +19,7 @@ import android.content.Intent;
 import android.provider.Settings;
 //import android.media.RingtoneManager;
 //import android.media.Ringtone;
-//import android.net.Uri;
+import android.net.Uri;
 //import android.support.v4.app.NotificationCompat;
 //import android.app.NotificationManager;
 //import android.R;
@@ -105,6 +105,8 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 		
 		// See http://developer.android.com/intl/vi/reference/android/provider/Settings.html for activity actions
 		//startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS));
+		Intent settingsAppIntent = new Intent(Intent.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.sensiblesolutions.ssncomfortsupport"));
+		
 		startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS), 1665);
 		//startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS), 0);
 	}
