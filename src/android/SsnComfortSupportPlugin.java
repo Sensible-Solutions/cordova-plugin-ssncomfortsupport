@@ -15,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.content.Context;
+import android.provider.Settings;
 //import android.media.RingtoneManager;
 //import android.media.Ringtone;
 //import android.net.Uri;
@@ -97,7 +98,9 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	{
 		JSONObject returnObj = new JSONObject();
 		
-		
+		// See http://developer.android.com/intl/vi/reference/android/provider/Settings.html for activity actions
+		startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS), 0);
+		//startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS), 0);
 	}
 	
 	private void getWifiNameAction(CallbackContext callbackContext)
