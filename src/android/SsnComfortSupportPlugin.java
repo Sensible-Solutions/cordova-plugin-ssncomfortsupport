@@ -49,7 +49,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	private final static String keyMessage = "message";
 	
 	// Status Types
-	private final static String statusOpenSettingsApp = "settingsApp";
+	private final static String statusOpenSettingsApp = "settingsAppOpened";
 	private final static String statusGetWifiName = "wifiName";
   
 	// Error Types
@@ -116,10 +116,14 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 		if (requestCode == 1665) {
 			// Make sure the request was successful
 			if (resultCode == RESULT_OK) {
-				// The operation was successful
+				// Notify user that the operation was successful
+				addProperty(returnObj, keyStatus, statusOpenSettingsApp);
+				PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, returnObj);
+				pluginResult.setKeepCallback(true);			// Save the callback so it can be invoked several time
+				openSettingsAppCallbackContext.sendPluginResult(pluginResult);
 			}
 			else {
-				//Notify user of operation failure
+				// Notify user of operation failure
 				addProperty(returnObj, keyError, errorOpenSettingsApp);
 				addProperty(returnObj, keyMessage, logSettingsApp);
 				PluginResult pluginResult = new PluginResult(PluginResult.Status.ERROR, returnObj);
