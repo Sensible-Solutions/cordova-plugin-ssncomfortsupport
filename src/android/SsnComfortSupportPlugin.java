@@ -115,6 +115,12 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 		//Intent settingsAppIntent = new Intent(Intent.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.sensiblesolutions.ssncomfortsupport"));
 		//Intent settingsAppIntent = new Intent(Intent.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package://com.example.app"));
 		//startActivityForResult(settingsAppIntent, 1665);
+		
+		// Notify user (if startActivityForResult not working else can remove below)
+		addProperty(returnObj, keyStatus, statusOpenSettingsApp);
+		PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, returnObj);
+		pluginResult.setKeepCallback(true);			// Save the callback so it can be invoked several time
+		openSettingsAppCallbackContext.sendPluginResult(pluginResult);
 	}
 	
 	@Override
