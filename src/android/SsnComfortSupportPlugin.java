@@ -58,7 +58,9 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	//private final static String logStatePoweredOff = "BLE is turned off for device";
 	
 	
-	//Actions
+	/*****************************************************************************************************
+	* Actions
+	*****************************************************************************************************/
 	@Override
 	public boolean execute(String action, final JSONArray args, final CallbackContext callbackContext) throws JSONException
 	{
@@ -96,5 +98,20 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	private void getWifiNameAction(CallbackContext callbackContext)
 	{
 	
+	}
+	
+	
+	/*****************************************************************************************************
+	* Helper functions
+	*****************************************************************************************************/
+	
+	private void addProperty(JSONObject obj, String key, Object value)
+	{
+		try {
+			obj.put(key, value);
+		}
+		catch (JSONException e) { 
+			/* Ignore */ 
+		}
 	}
 }
