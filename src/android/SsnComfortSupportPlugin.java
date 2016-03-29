@@ -23,6 +23,7 @@ import android.provider.Settings;
 //import android.support.v4.app.NotificationCompat;
 //import android.app.NotificationManager;
 //import android.R;
+import android.app.Activity;
 import android.app.AlertDialog;			        // For showing debug messaages
 import android.content.DialogInterface;		  	// For showing debug messaages
 
@@ -56,7 +57,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	private final static String errorGetWifiName = "wifiName";
 	
 	// Error Messages
- 	//private final static String logServerAlreadyRunning = "GATT server is already running";
+ 	private final static String logSettingsApp = "Could not open settings app for application";
 	//private final static String logService = "Immediate Alert service could not be added";
 	//private final static String logConnectionState = "Connection state changed with error";
 	//private final static String logStateUnsupported = "BLE is not supported by device";
@@ -100,8 +101,30 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 		JSONObject returnObj = new JSONObject();
 		
 		// See http://developer.android.com/intl/vi/reference/android/provider/Settings.html for activity actions
-		startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS), 0);
+		//startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS));
+		startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS), 1665);
 		//startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS), 0);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		
+		JSONObject returnObj = new JSONObject();
+		// Check which request we're responding to
+		if (requestCode == 1665) {
+			// Make sure the request was successful
+			if (resultCode == RESULT_OK) {
+				// The operation was successful
+			}
+			else {
+				//Notify user of operation failure
+				addProperty(returnObj, keyError, errorOpenSettingsApp);
+				addProperty(returnObj, keyMessage, logStateUnsupported);
+				PluginResult pluginResult = new PluginResult(PluginResult.Status.ERROR, returnObj);
+				pluginResult.setKeepCallback(false);
+				callbackContext.sendPluginResult(pluginResult);
+			}
+		}
 	}
 	
 	private void getWifiNameAction(CallbackContext callbackContext)
