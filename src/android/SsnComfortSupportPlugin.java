@@ -109,6 +109,8 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		
+		// Testing if startActivityForResult calls this. Else you can use startActivity instead and remove this function.
+		
 		JSONObject returnObj = new JSONObject();
 		// Check which request we're responding to
 		if (requestCode == 1665) {
@@ -119,7 +121,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 			else {
 				//Notify user of operation failure
 				addProperty(returnObj, keyError, errorOpenSettingsApp);
-				addProperty(returnObj, keyMessage, logStateUnsupported);
+				addProperty(returnObj, keyMessage, logSettingsApp);
 				PluginResult pluginResult = new PluginResult(PluginResult.Status.ERROR, returnObj);
 				pluginResult.setKeepCallback(false);
 				callbackContext.sendPluginResult(pluginResult);
