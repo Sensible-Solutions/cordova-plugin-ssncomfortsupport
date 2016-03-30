@@ -104,10 +104,10 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 		openSettingsAppCallbackContext = callbackContext;
 		
 		// See http://developer.android.com/intl/vi/reference/android/provider/Settings.html for activity actions
-		cordova.getActivity().startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS));
+		//cordova.getActivity().startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS)); // Works
 		//Intent settingsAppIntent = new Intent(Intent.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.sensiblesolutions.ssncomfortsupport"));
-		//Intent settingsAppIntent = new Intent(Intent.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package://com.example.app"));
-		//cordova.getActivity().startActivity(settingsAppIntent);
+		Intent settingsAppIntent = new Intent(Intent.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package://com.example.app"));
+		cordova.getActivity().startActivity(settingsAppIntent);
 		
 		// Test also with (check if onActivityResult callaback triggers?) instead of above
 		//cordova.getActivity().startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS), 1665);
