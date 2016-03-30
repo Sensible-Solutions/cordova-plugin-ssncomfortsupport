@@ -104,7 +104,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 		openSettingsAppCallbackContext = callbackContext;
 		
 		// See http://developer.android.com/intl/vi/reference/android/provider/Settings.html for activity actions
-		startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS));
+		Activity.startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS));
 		//Intent settingsAppIntent = new Intent(Intent.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.sensiblesolutions.ssncomfortsupport"));
 		//Intent settingsAppIntent = new Intent(Intent.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package://com.example.app"));
 		//startActivity(settingsAppIntent);
