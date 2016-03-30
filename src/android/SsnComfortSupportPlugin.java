@@ -113,8 +113,8 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 		// Test also with (check if onActivityResult callaback triggers?) instead of above
 		//cordova.getActivity().startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS), 1665);
 		// or below
-		//Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.sensiblesolutions.ssncomfortsupport"));
-		Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package://com.sensiblesolutions.ssncomfortsupport"));
+		Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.sensiblesolutions.ssncomfortsupport"));
+		//Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package://com.sensiblesolutions.ssncomfortsupport"));
 		cordova.getActivity().startActivityForResult(settingsAppIntent, 1665);
 		
 		// Notify user (if startActivityForResult not working else can remove below)
