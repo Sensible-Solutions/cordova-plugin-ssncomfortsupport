@@ -96,7 +96,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 		} 
 	}
 	
-	private void openSettingsAppAction(CallbackContext callbackContext)
+	private void openSettingsAppAction(JSONArray args, CallbackContext callbackContext)
 	{
 		JSONObject returnObj = new JSONObject();
 		
@@ -150,7 +150,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 		}
 	}
 	
-	private void getWifiNameAction(CallbackContext callbackContext)
+	private void getWifiNameAction(JSONArray args, CallbackContext callbackContext)
 	{
 	
 	}
