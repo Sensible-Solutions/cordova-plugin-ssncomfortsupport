@@ -145,7 +145,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 				addProperty(returnObj, keyMessage, logSettingsApp);
 				PluginResult pluginResult = new PluginResult(PluginResult.Status.ERROR, returnObj);
 				pluginResult.setKeepCallback(false);
-				callbackContext.sendPluginResult(pluginResult);
+				openSettingsAppCallbackContext.sendPluginResult(pluginResult);
 			}
 		}
 	}
