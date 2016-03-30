@@ -35,7 +35,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 {
 	// General variables
 	private final boolean mDEBUG = true;									// Debug flag, setting to true will show debug message boxes
-	private final static String mAPP_PACKAGE_NAME = "com.sensiblesolutions.sensesoftnotificationscomfort";	// Application package name
+	//private final static String mAPP_PACKAGE_NAME = "com.sensiblesolutions.sensesoftnotificationscomfort";	// Application package name
 	
  	// General callback variables
 	private CallbackContext openSettingsAppCallbackContext = null;
@@ -106,28 +106,28 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 		
 		// See http://developer.android.com/intl/vi/reference/android/provider/Settings.html for activity actions
 		//cordova.getActivity().startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS)); // Works
-		//Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + mAPP_PACKAGE_NAME));
-		//cordova.getActivity().startActivity(settingsAppIntent);
+		Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + cordova.getActivity().getApplicationContext().getPackageName())); // Works
+		cordova.getActivity().startActivity(settingsAppIntent); // Works
 		
-		// Test also with (check if onActivityResult callaback triggers?) instead of above
-		//cordova.getActivity().startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS), 1665);
-		// or below
-		//Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + mAPP_PACKAGE_NAME)); // Works
-		Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + cordova.getActivity().getApplicationContext().getPackageName()));
-		cordova.getActivity().startActivityForResult(settingsAppIntent, 1665);
-		
-		// Notify user (if startActivityForResult not working else can remove below)
-		/*addProperty(returnObj, keyStatus, statusOpenSettingsApp);
+		// Notify user
+		addProperty(returnObj, keyStatus, statusOpenSettingsApp);
 		PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, returnObj);
 		pluginResult.setKeepCallback(true);			// Save the callback so it can be invoked several time
-		openSettingsAppCallbackContext.sendPluginResult(pluginResult);*/
+		openSettingsAppCallbackContext.sendPluginResult(pluginResult);
+		
+		// Test also with (check if onActivityResult callaback triggers?) instead of above
+		//cordova.getActivity().startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS), 1665); // Works (but onActivityResults(...) is not called since this particular activity is not returning any results)
+		// or below
+		//Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + cordova.getActivity().getApplicationContext().getPackageName())); // Works (but onActivityResults(...) is not called since this particular action is not returning any results)
+		//Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + cordova.getActivity().getApplicationContext().getPackageName())); // Works also (but onActivityResults(...) is not called since this particular action is not returning any results)
+		//cordova.getActivity().startActivityForResult(settingsAppIntent, 1665);
 	}
 	
-	@Override
+	/*@Override
 	//protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		
-		// Testing if startActivityForResult calls this. Else you can use startActivity instead and remove this function.
+		// Testing if startActivityForResult calls this (Update: only called if activity actually is returning any results)
 		
 		JSONObject returnObj = new JSONObject();
 		// Check which request we're responding to
@@ -149,7 +149,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 				openSettingsAppCallbackContext.sendPluginResult(pluginResult);
 			}
 		}
-	}
+	}*/
 	
 	private void getWifiNameAction(JSONArray args, CallbackContext callbackContext)
 	{
