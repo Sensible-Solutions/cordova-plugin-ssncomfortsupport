@@ -124,7 +124,8 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	}
 	
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	//protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		
 		// Testing if startActivityForResult calls this. Else you can use startActivity instead and remove this function.
 		
@@ -132,7 +133,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 		// Check which request we're responding to
 		if (requestCode == 1665) {
 			// Make sure the request was successful
-			if (resultCode == RESULT_OK) {
+			if (resultCode == Activity.RESULT_OK) {
 				// Notify user that the operation was successful
 				addProperty(returnObj, keyStatus, statusOpenSettingsApp);
 				PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, returnObj);
