@@ -9,6 +9,23 @@
 //Plugin Name
 NSString *const pluginName = @"ssncomfortsupportplugin";
 
+// Object Keys
+NSString *const keyStatus = @"status";
+NSString *const keyError = @"error";
+NSString *const keyMessage = @"message";
+
+//Status Types
+NSString *const statusSettingsAppOpened = @"settingsAppOpened";
+NSString *const statusGetWifiName = @"wifiName";
+
+// Error Types
+NSString *const errorOpenSettingsApp = @"settingsApp";
+NSString *const errorGetWifiName = @"wifiName";
+
+// Error Messages
+NSString *const logSettingsApp = @"Could not open settings app for application";
+NSString *const logNoArgObj = @"Argument object can not be found";
+
 
 @implementation SsnComfortSupportPlugin
 
@@ -67,13 +84,13 @@ NSString *const pluginName = @"ssncomfortsupportplugin";
 // Called after plugin is initialized
 - (void) pluginInitialize
 {
-    // Not implemented
+	// Not implemented
 }
 
 // Called before app terminates
 - (void) onAppTerminate
 {
-    // Not implemeted
+    	// Not implemeted
 }
 
 // Called when plugin resets (navigates to a new page or refreshes)
