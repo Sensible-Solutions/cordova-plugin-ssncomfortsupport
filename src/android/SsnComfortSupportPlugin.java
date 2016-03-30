@@ -113,7 +113,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 		//cordova.getActivity().startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS), 1665);
 		// or below
 		//Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + mAPP_PACKAGE_NAME)); // Works
-		Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + cordova.getActivityContext.getPackageName()));
+		Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + cordova.getActivityContext().getPackageName()));
 		cordova.getActivity().startActivityForResult(settingsAppIntent, 1665);
 		
 		// Notify user (if startActivityForResult not working else can remove below)
