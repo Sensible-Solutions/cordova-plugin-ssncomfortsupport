@@ -106,15 +106,14 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 		
 		// See http://developer.android.com/intl/vi/reference/android/provider/Settings.html for activity actions
 		//cordova.getActivity().startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS)); // Works
-		//Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + mAPP_PACKAGE_NAME)); // Not working
-		//Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package://" + mAPP_PACKAGE_NAME)); // Not working
+		//Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + mAPP_PACKAGE_NAME));
 		//cordova.getActivity().startActivity(settingsAppIntent);
 		
 		// Test also with (check if onActivityResult callaback triggers?) instead of above
 		//cordova.getActivity().startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS), 1665);
 		// or below
-		Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + mAPP_PACKAGE_NAME));
-		//Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package://" + mAPP_PACKAGE_NAME));
+		//Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + mAPP_PACKAGE_NAME)); // Works
+		Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + cordova.getActivityContext.getPackageName()));
 		cordova.getActivity().startActivityForResult(settingsAppIntent, 1665);
 		
 		// Notify user (if startActivityForResult not working else can remove below)
