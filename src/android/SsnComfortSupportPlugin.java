@@ -106,22 +106,22 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 		
 		// See http://developer.android.com/intl/vi/reference/android/provider/Settings.html for activity actions
 		//cordova.getActivity().startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS)); // Works
-		Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + mAPP_PACKAGE_NAME));
+		//Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + mAPP_PACKAGE_NAME)); // Not working
 		//Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package://" + mAPP_PACKAGE_NAME)); // Not working
-		cordova.getActivity().startActivity(settingsAppIntent);
+		//cordova.getActivity().startActivity(settingsAppIntent);
 		
 		// Test also with (check if onActivityResult callaback triggers?) instead of above
 		//cordova.getActivity().startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS), 1665);
 		// or below
-		//Intent settingsAppIntent = new Intent(Intent.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.sensiblesolutions.ssncomfortsupport"));
-		//Intent settingsAppIntent = new Intent(Intent.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package://com.example.app"));
-		//cordova.getActivity().startActivityForResult(settingsAppIntent, 1665);
+		//Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.sensiblesolutions.ssncomfortsupport"));
+		Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package://com.sensiblesolutions.ssncomfortsupport"));
+		cordova.getActivity().startActivityForResult(settingsAppIntent, 1665);
 		
 		// Notify user (if startActivityForResult not working else can remove below)
-		addProperty(returnObj, keyStatus, statusOpenSettingsApp);
+		/*addProperty(returnObj, keyStatus, statusOpenSettingsApp);
 		PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, returnObj);
 		pluginResult.setKeepCallback(true);			// Save the callback so it can be invoked several time
-		openSettingsAppCallbackContext.sendPluginResult(pluginResult);
+		openSettingsAppCallbackContext.sendPluginResult(pluginResult);*/
 	}
 	
 	@Override
