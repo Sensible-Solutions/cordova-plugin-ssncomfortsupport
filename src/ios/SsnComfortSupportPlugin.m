@@ -38,6 +38,11 @@ NSString *const logNoArgObj = @"Argument object can not be found";
 
 }
 
+- (void)getWifiName:(CDVInvokedUrlCommand *)command
+{
+
+}
+
 
 #pragma mark -
 #pragma mark Delegates
