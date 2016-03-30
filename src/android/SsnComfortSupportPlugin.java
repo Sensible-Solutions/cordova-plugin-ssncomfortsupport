@@ -34,7 +34,8 @@ import android.content.DialogInterface;		  	// For showing debug messaages
 public class SsnComfortSupportPlugin extends CordovaPlugin
 {
 	// General variables
-	private final boolean mDEBUG = true;		// Debug flag, setting to true will show debug message boxes
+	private final boolean mDEBUG = true;								// Debug flag, setting to true will show debug message boxes
+	private final static String mAPP_PACKAGE_NAME = "com.sensiblesolutions.ssncomfortsupport";	// Application package name
 	
  	// General callback variables
 	private CallbackContext openSettingsAppCallbackContext = null;
@@ -106,7 +107,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 		// See http://developer.android.com/intl/vi/reference/android/provider/Settings.html for activity actions
 		//cordova.getActivity().startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS)); // Works
 		//Intent settingsAppIntent = new Intent(Intent.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:com.sensiblesolutions.ssncomfortsupport"));
-		Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package://com.example.app"));
+		Intent settingsAppIntent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package://" + mAPP_PACKAGE_NAME));
 		cordova.getActivity().startActivity(settingsAppIntent);
 		
 		// Test also with (check if onActivityResult callaback triggers?) instead of above
