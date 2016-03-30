@@ -93,7 +93,7 @@ NSString *const logNoArgObj = @"Argument object can not be found";
         }
 }
 
-
+/*
 #pragma mark -
 #pragma mark CDVPlugin delegates (see CDVPlugin.m and CDVPlugin.h)
 
@@ -130,7 +130,7 @@ NSString *const logNoArgObj = @"Argument object can not be found";
     NSURL* url = [notification object];
 
     if ([url isKindOfClass:[NSURL class]]) {
-        /* Do your thing! */
+        // Do your thing!
     }
 }
 
@@ -159,6 +159,6 @@ NSString *const logNoArgObj = @"Argument object can not be found";
 	// NOTE: if you want to use this, make sure you add the corresponding notification handler in CDVPlugin.m
 	// Not implemented
 }
-
+*/
 
 @end
