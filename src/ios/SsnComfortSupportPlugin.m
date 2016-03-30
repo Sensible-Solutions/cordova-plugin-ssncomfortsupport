@@ -46,3 +46,40 @@ NSString *const pluginName = @"ssncomfortsupportplugin";
 
     return (NSDictionary *)[args objectAtIndex:0];
 }
+
+- (BOOL) isNotArgsObject:(NSDictionary*) obj :(CDVInvokedUrlCommand *)command
+{
+    if (obj != nil)
+        return false;
+
+    NSDictionary* returnObj = [NSDictionary dictionaryWithObjectsAndKeys: errorArguments, keyError, logNoArgObj, keyMessage, nil];
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:returnObj];
+    [pluginResult setKeepCallbackAsBool:false];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+
+    return true;
+}
+
+
+#pragma mark -
+#pragma mark CDVPlugin delegates
+
+// Called after plugin is initialized
+- (void) pluginInitialize
+{
+    // Not implemented
+}
+
+// Called before app terminates
+- (void) onAppTerminate
+{
+    // Not implemeted
+}
+
+// Called when plugin resets (navigates to a new page or refreshes)
+- (void) onReset
+{
+	// Not implemented
+}
+
+@end
