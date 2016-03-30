@@ -24,6 +24,7 @@ NSString *const statusGetWifiName = @"wifiName";
 // Error Types
 NSString *const errorOpenSettingsApp = @"settingsApp";
 NSString *const errorGetWifiName = @"wifiName";
+NSString *const errorArguments = @"arguments";
 
 // Error Messages
 NSString *const logSettingsApp = @"Could not open settings app for application";
