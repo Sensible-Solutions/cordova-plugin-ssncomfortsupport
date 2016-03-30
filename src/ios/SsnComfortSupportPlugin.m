@@ -6,15 +6,18 @@
 
 #import "SsnComfortSupportPlugin.h"
 
-//Plugin Name
+// Plugin Name
 NSString *const pluginName = @"ssncomfortsupportplugin";
 
+// General variables
+bool mDEBUG = true;			// Debug flag, setting to true will show debug message boxes
+	
 // Object Keys
 NSString *const keyStatus = @"status";
 NSString *const keyError = @"error";
 NSString *const keyMessage = @"message";
 
-//Status Types
+// Status Types
 NSString *const statusSettingsAppOpened = @"settingsAppOpened";
 NSString *const statusGetWifiName = @"wifiName";
 
@@ -82,12 +85,55 @@ NSString *const logNoArgObj = @"Argument object can not be found";
     return true;
 }
 
+- (void) showDebugMsgBox: (NSString *const) msg
+{
+	if (mDEBUG) {
+		UIAlertView *debugAlert = [[UIAlertView alloc] initWithTitle: @"Debug SsnComfortPlugin" message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        	[debugAlert show];
+        }
+}
+
 
 #pragma mark -
 #pragma mark CDVPlugin delegates
 
 // Called after plugin is initialized
 - (void) pluginInitialize
+{
+	// Not implemented
+}
+
+// The final call you receive before your activity is destroyed
+- (void) onDestroy
+{
+	// Not implemented
+}
+
+// Called when the activity is becoming visible to the user
+- (void) onStart
+{
+	// Not implemented
+}
+
+// Called when the activity is no longer visible to the user
+- (void) onStop
+{
+	// Not implemented
+}
+
+- (void) onStop
+{
+	// Not implemented
+}
+
+// Called when the system is about to start resuming a previous activity
+- (void) onPause
+{
+	// Not implemented
+}
+
+// Called when the activity will start interacting with the user
+- (void) onResume
 {
 	// Not implemented
 }
@@ -103,5 +149,7 @@ NSString *const logNoArgObj = @"Argument object can not be found";
 {
 	// Not implemented
 }
+
+
 
 @end
