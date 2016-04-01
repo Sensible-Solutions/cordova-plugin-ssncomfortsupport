@@ -11,7 +11,7 @@
 @interface SsnComfortSupportPlugin : CDVPlugin
 {
 	
-	NSString *openSettingsAppCallback;
+	//NSString *openSettingsAppCallback;
 	
 }
 
