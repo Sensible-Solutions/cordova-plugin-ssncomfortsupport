@@ -5,6 +5,7 @@
 */
 
 #import "SsnComfortSupportPlugin.h"
+#import <SystemConfiguration/CaptiveNetwork.h>
 
 // Plugin Name
 NSString *const pluginName = @"ssncomfortsupportplugin";
@@ -16,10 +17,11 @@ bool mDEBUG = true;			// Debug flag, setting to true will show debug message box
 NSString *const keyStatus = @"status";
 NSString *const keyError = @"error";
 NSString *const keyMessage = @"message";
+NSString *const keySsid = @"ssid";
 
 // Status Types
 NSString *const statusSettingsAppOpened = @"settingsAppOpened";
-NSString *const statusGetWifiName = @"wifiName";
+//NSString *const statusGetWifiName = @"ssid";
 
 // Error Types
 NSString *const errorOpenSettingsApp = @"settingsApp";
@@ -28,6 +30,7 @@ NSString *const errorArguments = @"arguments";
 
 // Error Messages
 NSString *const logSettingsApp = @"Could not open settings app for application";
+NSString *const logGetWifiName = @"Could not get wifi name";
 NSString *const logNoArgObj = @"Argument object can not be found";
 
 
@@ -45,14 +48,12 @@ NSString *const logNoArgObj = @"Argument object can not be found";
 	// Launch the Settings app and displays the app’s custom settings
 	NSURL *appSettings = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
 	if ([[UIApplication sharedApplication] openURL:appSettings]) {
-		
 		NSDictionary* returnObj = [NSDictionary dictionaryWithObjectsAndKeys: statusSettingsAppOpened, keyStatus, nil];
 	        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:returnObj];
 		[pluginResult setKeepCallbackAsBool:false];
 	        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 	}
 	else {
-	
 		NSDictionary* returnObj = [NSDictionary dictionaryWithObjectsAndKeys: errorOpenSettingsApp, keyError, logSettingsApp, keyMessage, nil];
         	CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:returnObj];
 		[pluginResult setKeepCallbackAsBool:false];
@@ -62,7 +63,26 @@ NSString *const logNoArgObj = @"Argument object can not be found";
 
 - (void)getWifiName:(CDVInvokedUrlCommand *)command
 {
-
+	NSArray *interfaceNames = (__bridge_transfer NSArray *)CNCopySupportedInterfaces();
+	NSDictionary *wifiInfo;
+	for (NSString *interfaceName in interfaceNames) {
+		wifiInfo = (__bridge_transfer NSDictionary *)CNCopyCurrentNetworkInfo((__bridge CFStringRef)interfaceName);
+        	if (WifiInfo && [WifiInfo count]) { break; }
+	}
+    
+    	NSString *ssid = [wifiInfo objectForKey:(id)kCNNetworkInfoKeySSID];		//@"SSID"
+    	if (ssid && [ssid length]) {
+    		NSDictionary* returnObj = [NSDictionary dictionaryWithObjectsAndKeys: ssid, keySsid, nil];
+    		CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:returnObj];
+    		[pluginResult setKeepCallbackAsBool:false];
+    		[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    	}
+    	else {
+    		NSDictionary* returnObj = [NSDictionary dictionaryWithObjectsAndKeys: errorGetWifiName, keyError, logGetWifiName, keyMessage, nil];
+        	CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:returnObj];
+		[pluginResult setKeepCallbackAsBool:false];
+	 	[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    	}
 }
 
 
