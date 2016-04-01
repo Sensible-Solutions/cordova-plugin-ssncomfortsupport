@@ -20,6 +20,7 @@ import android.provider.Settings;
 //import android.media.RingtoneManager;
 //import android.media.Ringtone;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 //import android.support.v4.app.NotificationCompat;
 //import android.app.NotificationManager;
 //import android.R;
@@ -61,6 +62,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	// Error Messages
  	private final static String logSettingsApp = "Could not open settings app for application";
  	private final static String logGetWifiName = "Could not get wifi name";
+ 	private final static String logWifidisabled = "Wifi is disabled";
 	//private final static String logService = "Immediate Alert service could not be added";
 	//private final static String logConnectionState = "Connection state changed with error";
 	//private final static String logStateUnsupported = "BLE is not supported by device";
@@ -155,7 +157,46 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	
 	private void getWifiNameAction(JSONArray args, CallbackContext callbackContext)
 	{
-	
+		WifiManager wifiManager = (WifiManager) cordova.getActivity().getSystemService(Context.WIFI_SERVICE);
+		JSONObject returnObj = new JSONObject();
+		
+		if (!wifiManager.isWifiEnabled()) {
+			addProperty(returnObj, keyError, errorGetWifiName);
+			addProperty(returnObj, keyMessage, logWifidisabled);
+			PluginResult pluginResult = new PluginResult(PluginResult.Status.ERROR, returnObj);
+			pluginResult.setKeepCallback(false);
+			callbackContext.sendPluginResult(pluginResult);
+            		return;
+        	}
+
+        	WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+
+        	if (wifiInfo == null) {
+        		addProperty(returnObj, keyError, errorGetWifiName);
+			addProperty(returnObj, keyMessage, logGetWifiName);
+			PluginResult pluginResult = new PluginResult(PluginResult.Status.ERROR, returnObj);
+			pluginResult.setKeepCallback(false);
+			callbackContext.sendPluginResult(pluginResult);
+            		return;
+        	}
+
+        	String ssid = wifiInfo.getSSID();
+        	if (ssid.isEmpty()) {
+              		ssid = wifiInfo.getBSSID();
+        	}
+        	if (ssid.isEmpty()) {
+            		addProperty(returnObj, keyError, errorGetWifiName);
+			addProperty(returnObj, keyMessage, logGetWifiName);
+			PluginResult pluginResult = new PluginResult(PluginResult.Status.ERROR, returnObj);
+			pluginResult.setKeepCallback(false);
+			callbackContext.sendPluginResult(pluginResult);
+            		return;
+        	}
+
+        	addProperty(returnObj, keySsid, ssid);
+		PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, returnObj);
+		pluginResult.setKeepCallback(false);
+		callbackContext.sendPluginResult(pluginResult);
 	}
 	
 	
