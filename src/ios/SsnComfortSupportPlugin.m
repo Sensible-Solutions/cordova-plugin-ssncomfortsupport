@@ -67,7 +67,7 @@ NSString *const logNoArgObj = @"Argument object can not be found";
 	NSDictionary *wifiInfo;
 	for (NSString *interfaceName in interfaceNames) {
 		wifiInfo = (__bridge_transfer NSDictionary *)CNCopyCurrentNetworkInfo((__bridge CFStringRef)interfaceName);
-        	if (WifiInfo && [WifiInfo count]) { break; }
+        	if (wifiInfo && [wifiInfo count]) { break; }
 	}
     
     	NSString *ssid = [wifiInfo objectForKey:(id)kCNNetworkInfoKeySSID];		//@"SSID"
