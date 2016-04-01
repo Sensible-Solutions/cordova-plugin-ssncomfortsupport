@@ -40,6 +40,25 @@ NSString *const logNoArgObj = @"Argument object can not be found";
 - (void)openSettingsApp:(CDVInvokedUrlCommand *)command
 {
 
+	// Save the callback
+	openSettingsAppCallback = command.callbackId;
+	// Launch the Settings app and displays the app’s custom settings
+	UIApplication.sharedApplication().openURL(NSURL.URLWithString(UIApplicationOpenSettingsURLString))
+	NSURL *appSettings = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+	if ([[UIApplication sharedApplication] openURL:appSettings]) {
+		
+		NSDictionary* returnObj = [NSDictionary dictionaryWithObjectsAndKeys: statusSettingsAppOpened, keyStatus, nil];
+	        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:returnObj];
+		[pluginResult setKeepCallbackAsBool:false];
+	        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+	}
+	else {
+	
+		NSDictionary* returnObj = [NSDictionary dictionaryWithObjectsAndKeys: errorOpenSettingsApp, keyError, logSettingsApp, keyMessage, nil];
+        	CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:returnObj];
+		[pluginResult setKeepCallbackAsBool:false];
+	 	[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+	}
 }
 
 - (void)getWifiName:(CDVInvokedUrlCommand *)command
