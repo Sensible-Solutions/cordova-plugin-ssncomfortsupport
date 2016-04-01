@@ -43,7 +43,6 @@ NSString *const logNoArgObj = @"Argument object can not be found";
 	// Save the callback
 	openSettingsAppCallback = command.callbackId;
 	// Launch the Settings app and displays the app’s custom settings
-	UIApplication.sharedApplication().openURL(NSURL.URLWithString(UIApplicationOpenSettingsURLString))
 	NSURL *appSettings = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
 	if ([[UIApplication sharedApplication] openURL:appSettings]) {
 		
