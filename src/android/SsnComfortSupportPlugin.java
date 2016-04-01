@@ -48,10 +48,11 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	private final static String keyStatus = "status";
 	private final static String keyError = "error";
 	private final static String keyMessage = "message";
+	private final static String keySsid = "ssid";
 	
 	// Status Types
 	private final static String statusOpenSettingsApp = "settingsAppOpened";
-	private final static String statusGetWifiName = "wifiName";
+	//private final static String statusGetWifiName = "wifiName";
   
 	// Error Types
 	private final static String errorOpenSettingsApp = "settingsApp";
@@ -59,6 +60,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	
 	// Error Messages
  	private final static String logSettingsApp = "Could not open settings app for application";
+ 	private final static String logGetWifiName = "Could not get wifi name";
 	//private final static String logService = "Immediate Alert service could not be added";
 	//private final static String logConnectionState = "Connection state changed with error";
 	//private final static String logStateUnsupported = "BLE is not supported by device";
@@ -102,7 +104,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 		JSONObject returnObj = new JSONObject();
 		
 		// Save the callback context for open the settings app
-		openSettingsAppCallbackContext = callbackContext;
+		//openSettingsAppCallbackContext = callbackContext;
 		
 		// See http://developer.android.com/intl/vi/reference/android/provider/Settings.html for activity actions
 		//cordova.getActivity().startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS)); // Works
@@ -112,8 +114,8 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 		// Notify user
 		addProperty(returnObj, keyStatus, statusOpenSettingsApp);
 		PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, returnObj);
-		pluginResult.setKeepCallback(true);			// Save the callback so it can be invoked several time
-		openSettingsAppCallbackContext.sendPluginResult(pluginResult);
+		pluginResult.setKeepCallback(false);
+		callbackContext.sendPluginResult(pluginResult);
 		
 		// Test also with (check if onActivityResult callaback triggers?) instead of above
 		//cordova.getActivity().startActivityForResult(new Intent(android.provider.Settings.ACTION_APPLICATION_SETTINGS), 1665); // Works (but onActivityResults(...) is not called since this particular activity is not returning any results)
