@@ -5,7 +5,7 @@
 */
 
 #import "SsnComfortSupportPlugin.h"
-//#import <SystemConfiguration/CaptiveNetwork.h>
+#import <SystemConfiguration/CaptiveNetwork.h>
 
 // Plugin Name
 NSString *const pluginName = @"ssncomfortsupportplugin";
