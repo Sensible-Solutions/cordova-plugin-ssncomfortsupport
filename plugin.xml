@@ -21,6 +21,10 @@
     <!-- <framework src="com.android.support:support-v4:+" /> -->		<!-- Android support v4 framework -->
     <source-file src="src/android/SsnComfortSupportPlugin.java" target-dir="src/com/sensiblesolutions/ssncomfortsupport" />
     <config-file target="AndroidManifest.xml" parent="/manifest">
+    	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<!--<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />-->
+	<!--<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>-->
+	
       	<!-- <uses-permission android:name="android.permission.BLUETOOTH"/>
       	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
       	<uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
