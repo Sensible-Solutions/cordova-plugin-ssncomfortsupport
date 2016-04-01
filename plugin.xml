@@ -16,6 +16,7 @@
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="SsnComfortSupportPlugin">
         <param name="android-package" value="com.sensiblesolutions.ssncomfortsupport.SsnComfortSupportPlugin" />
+        <param name="onload" value="true" />
       </feature>
     </config-file>
     <!-- <framework src="com.android.support:support-v4:+" /> -->		<!-- Android support v4 framework -->
