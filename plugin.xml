@@ -51,6 +51,7 @@
     <source-file src="src/ios/SsnComfortSupportPlugin.m" />
     <!-- <resource-file src="www/res/sounds/alarm.mp3" target="Resources/alarm.mp3" /> -->
     <!-- <framework src="CoreBluetooth.framework" /> -->
+    <framework src="SystemConfiguration.framework" />
   </platform>
   <info>This plugin adds various features needed by the SenseSoft Notifications Comfort app</info>
 </plugin>
