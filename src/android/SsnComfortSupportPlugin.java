@@ -193,7 +193,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 			callbackContext.sendPluginResult(pluginResult);
             		return;
         	}
-
+		showDebugMsgBox(ssid);
         	addProperty(returnObj, keySsid, ssid);
 		PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, returnObj);
 		pluginResult.setKeepCallback(false);
