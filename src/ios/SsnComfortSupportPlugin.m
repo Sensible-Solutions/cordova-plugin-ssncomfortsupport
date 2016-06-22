@@ -22,6 +22,7 @@ NSString *const keySsid = @"ssid";
 // Status Types
 NSString *const statusSettingsAppOpened = @"settingsAppOpened";
 NSString *const statusNotificationSoundPlayed = @"notificationSoundPlayed";
+NSString *const statusNotificationSoundNotEnabled = @"notificationSoundNotEnabled";
 //NSString *const statusGetWifiName = @"ssid";
 
 // Error Types
@@ -88,11 +89,27 @@ NSString *const logNoArgObj = @"Argument object can not be found";
 
 - (void)playNotificationSound:(CDVInvokedUrlCommand *)command
 {
-	AudioServicesPlayAlertSound(notificationSoundID);	// Also vibrates if possible
+	//AudioServicesPlayAlertSound(notificationSoundID);	// Also vibrates if possible
 	//AudioServicesPlayAlertSound(1315);
 	//AudioServicesPlaySystemSound(1315);
 	
-	NSDictionary* returnObj = [NSDictionary dictionaryWithObjectsAndKeys: statusNotificationSoundPlayed, keyStatus, nil];
+	if ([[UIApplication sharedApplication] respondsToSelector:@selector(currentUserNotificationSettings)]){		// Check it's iOS 8 and above
+		// Check if remote notifications are enabled for the app
+		if ([[UIApplication sharedApplication] isRegisteredForRemoteNotifications]){
+			UIUserNotificationSettings *grantedSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
+			// Check if notification sound is enabled
+			if (grantedSettings.types & UIUserNotificationTypeSound){
+				AudioServicesPlayAlertSound(notificationSoundID);	// Also vibrates if possible
+				NSDictionary* returnObj = [NSDictionary dictionaryWithObjectsAndKeys: statusNotificationSoundPlayed, keyStatus, nil];
+				CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:returnObj];
+				[pluginResult setKeepCallbackAsBool:false];
+				[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+				return;
+			}
+		}
+	}
+	
+	NSDictionary* returnObj = [NSDictionary dictionaryWithObjectsAndKeys: statusNotificationSoundNotEnabled, keyStatus, nil];
 	CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:returnObj];
 	[pluginResult setKeepCallbackAsBool:false];
 	[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
