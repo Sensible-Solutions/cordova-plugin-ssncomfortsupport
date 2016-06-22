@@ -8,7 +8,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 #import <AudioToolbox/AudioServices.h>
 
-#define notificationSoundID 1104
+#define notificationSoundID 1315
 
 @interface SsnComfortSupportPlugin : CDVPlugin
 {
