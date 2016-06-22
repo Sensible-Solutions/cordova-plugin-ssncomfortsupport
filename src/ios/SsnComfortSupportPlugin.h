@@ -6,7 +6,7 @@
 
 #import <Cordova/CDV.h>
 #import <CoreBluetooth/CoreBluetooth.h>
-//#import <AudioToolbox/AudioServices.h>
+#import <AudioToolbox/AudioServices.h>
 
 @interface SsnComfortSupportPlugin : CDVPlugin
 {
@@ -17,5 +17,6 @@
 
 - (void)openSettingsApp:(CDVInvokedUrlCommand *)command;
 - (void)getWifiName:(CDVInvokedUrlCommand *)command;
+- (void)playNotificationSound:(CDVInvokedUrlCommand *)command;
 
 @end
