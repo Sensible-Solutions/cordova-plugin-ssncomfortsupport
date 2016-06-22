@@ -21,6 +21,7 @@ NSString *const keySsid = @"ssid";
 
 // Status Types
 NSString *const statusSettingsAppOpened = @"settingsAppOpened";
+NSString *const statusNotificationSoundPlayed = @"notificationSoundPlayed";
 //NSString *const statusGetWifiName = @"ssid";
 
 // Error Types
@@ -85,12 +86,21 @@ NSString *const logNoArgObj = @"Argument object can not be found";
     	}
 }
 
+- (void)playNotificationSound:(CDVInvokedUrlCommand *)command
+{
+	AudioServicesPlaySystemSound(notificationSoundID);
+	
+	NSDictionary* returnObj = [NSDictionary dictionaryWithObjectsAndKeys: statusNotificationSoundPlayed, keyStatus, nil];
+	CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:returnObj];
+	[pluginResult setKeepCallbackAsBool:false];
+	[self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
 
 #pragma mark -
 #pragma mark Delegates
 
-// CBPeripheralManager Delegate Methods
-//
+// Delegate Methods
 
 
 #pragma mark -
