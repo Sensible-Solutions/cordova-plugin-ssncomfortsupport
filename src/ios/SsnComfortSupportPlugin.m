@@ -88,7 +88,7 @@ NSString *const logNoArgObj = @"Argument object can not be found";
 
 - (void)playNotificationSound:(CDVInvokedUrlCommand *)command
 {
-	AudioServicesPlaySystemSound(notificationSoundID);
+	AudioServicesPlayAlertSound(notificationSoundID);	// Also vibrates if possible
 	
 	NSDictionary* returnObj = [NSDictionary dictionaryWithObjectsAndKeys: statusNotificationSoundPlayed, keyStatus, nil];
 	CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:returnObj];
