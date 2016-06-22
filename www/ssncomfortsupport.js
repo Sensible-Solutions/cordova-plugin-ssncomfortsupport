@@ -8,6 +8,9 @@ var ssncomfortsupport = {
 	},
 	getWifiName: function(successCallback, errorCallback) {
 		cordova.exec(successCallback, errorCallback, ssnComfortSupportName, "getWifiName", []); 
+	},
+	playNotificationSound: function(successCallback, errorCallback) {
+		cordova.exec(successCallback, errorCallback, ssnComfortSupportName, "playNotificationSound", []); 
 	}
 	/*startServer: function(successCallback, errorCallback, params) {
 		cordova.exec(successCallback, errorCallback, gattServerName, "startServer", [params]); 
