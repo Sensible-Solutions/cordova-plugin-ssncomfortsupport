@@ -182,19 +182,30 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
         	}
 
         	String ssid = wifiInfo.getSSID();
-		if (ssid == null)
-			ssid = "Hej";
-        	/*if (ssid.isEmpty()) {
-              		ssid = wifiInfo.getBSSID();
-        	}
-        	if (ssid.isEmpty()) {
-            		addProperty(returnObj, keyError, errorGetWifiName);
+		if (ssid != null) {
+        		if (ssid.isEmpty()) {
+              			ssid = wifiInfo.getBSSID();
+        		}
+		}
+		
+		if (ssid != null) {
+			if (ssid.isEmpty()) {
+				addProperty(returnObj, keyError, errorGetWifiName);
+				addProperty(returnObj, keyMessage, logGetWifiName);
+				PluginResult pluginResult = new PluginResult(PluginResult.Status.ERROR, returnObj);
+				pluginResult.setKeepCallback(false);
+				callbackContext.sendPluginResult(pluginResult);
+				return;
+			}
+		}
+		else {
+			addProperty(returnObj, keyError, errorGetWifiName);
 			addProperty(returnObj, keyMessage, logGetWifiName);
 			PluginResult pluginResult = new PluginResult(PluginResult.Status.ERROR, returnObj);
 			pluginResult.setKeepCallback(false);
 			callbackContext.sendPluginResult(pluginResult);
-            		return;
-        	}*/
+			return;
+		}
 		
         	addProperty(returnObj, keySsid, ssid);
 		PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, returnObj);
