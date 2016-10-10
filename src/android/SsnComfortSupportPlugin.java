@@ -182,7 +182,9 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
         	}
 
         	String ssid = wifiInfo.getSSID();
-        	if (ssid.isEmpty()) {
+		if (ssid == null)
+			ssid = "Hej";
+        	/*if (ssid.isEmpty()) {
               		ssid = wifiInfo.getBSSID();
         	}
         	if (ssid.isEmpty()) {
@@ -192,7 +194,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 			pluginResult.setKeepCallback(false);
 			callbackContext.sendPluginResult(pluginResult);
             		return;
-        	}
+        	}*/
 		
         	addProperty(returnObj, keySsid, ssid);
 		PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, returnObj);
