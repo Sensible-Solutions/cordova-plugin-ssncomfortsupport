@@ -24,6 +24,7 @@ import android.media.AudioManager;
 import android.os.Vibrator;
 import android.Manifest.permission;
 import android.support.v4.content.ContextCompat;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -66,7 +67,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	// Error Types
 	private final static String errorOpenSettingsApp = "settingsApp";
 	private final static String errorGetWifiName = "wifiName";
-	//private final static String errorPlayNotificationSound = "playNotificationSound";
+	private final static String errorPlayNotificationSound = "playNotificationSound";
 	
 	// Error Messages
  	private final static String logSettingsApp = "Could not open settings app for application";
@@ -232,7 +233,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	
 	private void playNotificationSoundAction(JSONArray args, CallbackContext callbackContext)
 	{
-		// Plays the default notification sound
+		// Plays the default notification sound (no need to check if notifications are enabled for the app if it is checked before calling this plugin function) 
 		Uri defaultRingtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 		MediaPlayer mediaPlayer = new MediaPlayer();
 		JSONObject returnObj = new JSONObject();
