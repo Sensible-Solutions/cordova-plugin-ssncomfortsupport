@@ -252,7 +252,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 			callbackContext.sendPluginResult(pluginResult);*/
 			return;
 		}
-		addProperty(returnObj, statusGetWifiName, null);
+		addProperty(returnObj, keyStatus, statusNotificationSoundPlayed);
 		PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, returnObj);
 		pluginResult.setKeepCallback(false);
 		callbackContext.sendPluginResult(pluginResult);
