@@ -238,7 +238,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 			mediaPlayer.setDataSource(cordova.getActivity().getApplicationContext(), defaultRingtoneUri);
 		      	mediaPlayer.setAudioStreamType(AudioManager.STREAM_NOTIFICATION);
 		      	mediaPlayer.prepare();
-		      	mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
+		      	mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 				@Override
 				public void onCompletion(MediaPlayer mp)
 				{
