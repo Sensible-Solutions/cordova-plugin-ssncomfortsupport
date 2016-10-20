@@ -61,13 +61,13 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	// Error Types
 	private final static String errorOpenSettingsApp = "settingsApp";
 	private final static String errorGetWifiName = "wifiName";
-	private final static String errorPlayNotificationSound = "playNotification";
+	//private final static String errorPlayNotificationSound = "playNotificationSound";
 	
 	// Error Messages
  	private final static String logSettingsApp = "Could not open settings app for application";
  	private final static String logGetWifiName = "Could not get wifi name";
  	private final static String logWifidisabled = "Wifi is disabled";
-	private final static String logPlayNotificationSound = "Exception thrown";
+	//private final static String logPlayNotificationSound = "Exception thrown";
 	//private final static String logService = "Immediate Alert service could not be added";
 	//private final static String logConnectionState = "Connection state changed with error";
 	//private final static String logStateUnsupported = "BLE is not supported by device";
@@ -249,10 +249,10 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 			addProperty(returnObj, keyMessage, logPlayNotificationSound);
 			PluginResult pluginResult = new PluginResult(PluginResult.Status.ERROR, returnObj);
 			pluginResult.setKeepCallback(false);
-			callbackContext.sendPluginResult(pluginResult);
-			return;*/
+			callbackContext.sendPluginResult(pluginResult);*/
+			return;
 		}
-		addProperty(returnObj, keySsid, ssid);
+		addProperty(returnObj, statusGetWifiName, null);
 		PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, returnObj);
 		pluginResult.setKeepCallback(false);
 		callbackContext.sendPluginResult(pluginResult);
