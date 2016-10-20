@@ -45,7 +45,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	// Action Name Strings
 	private final static String OPEN_SETTINGS_APP = "openSettingsApp";
 	private final static String GET_WIFI_NAME = "getWifiName";
-	private final static String PLAY_DEFAULT_NOTIFICATION = "playNotification";
+	private final static String PLAY_NOTIFICATION_SOUND = "playNotificationSound";
 	
 	// Object keys
 	private final static String keyStatus = "status";
@@ -60,13 +60,13 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	// Error Types
 	private final static String errorOpenSettingsApp = "settingsApp";
 	private final static String errorGetWifiName = "wifiName";
-	private final static String errorPlayNotification = "playNotification";
+	private final static String errorPlayNotificationSound = "playNotification";
 	
 	// Error Messages
  	private final static String logSettingsApp = "Could not open settings app for application";
  	private final static String logGetWifiName = "Could not get wifi name";
  	private final static String logWifidisabled = "Wifi is disabled";
-	private final static String logPlayNotification = "Exception thrown";
+	private final static String logPlayNotificationSound = "Exception thrown";
 	//private final static String logService = "Immediate Alert service could not be added";
 	//private final static String logConnectionState = "Connection state changed with error";
 	//private final static String logStateUnsupported = "BLE is not supported by device";
@@ -96,10 +96,10 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 				});
 				return true;
 			}
-			else if (PLAY_DEFAULT_NOTIFICATION.equals(action)) {
+			else if (PLAY_NOTIFICATION_SOUND.equals(action)) {
 				cordova.getThreadPool().execute(new Runnable() {
 					public void run() {
-						playNotificationAction(args, callbackContext);
+						playNotificationSoundAction(args, callbackContext);
 					}
 				});
 				return true;
@@ -224,12 +224,12 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 		callbackContext.sendPluginResult(pluginResult);
 	}
 	
-	private void playNotificationAction(JSONArray args, CallbackContext callbackContext)
+	private void playNotificationSoundAction(JSONArray args, CallbackContext callbackContext)
 	{
-		// Plays the default notification sound (only needed in Android since when receiving a push notification
-		// with forceShow set to true, the notification sound will not be automatically played
+		// Plays the default notification sound
 		Uri defaultRingtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 		MediaPlayer mediaPlayer = new MediaPlayer();
+		JSONObject returnObj = new JSONObject();
 		
 		try {
 			mediaPlayer.setDataSource(cordova.getActivity().getApplicationContext(), defaultRingtoneUri);
@@ -244,13 +244,17 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
      			});
   			mediaPlayer.start();
 		} catch (Exception e) {
-			JSONObject returnObj = new JSONObject();
-			addProperty(returnObj, keyError, errorPlayNotification);
-			addProperty(returnObj, keyMessage, logPlayNotification);
+			/*addProperty(returnObj, keyError, errorPlayNotificationSound);
+			addProperty(returnObj, keyMessage, logPlayNotificationSound);
 			PluginResult pluginResult = new PluginResult(PluginResult.Status.ERROR, returnObj);
 			pluginResult.setKeepCallback(false);
-			callbackContext.sendPluginResult(pluginResult);	
+			callbackContext.sendPluginResult(pluginResult);
+			return;*/
 		}
+		addProperty(returnObj, keySsid, ssid);
+		PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, returnObj);
+		pluginResult.setKeepCallback(false);
+		callbackContext.sendPluginResult(pluginResult);
 	}
 	
 	
