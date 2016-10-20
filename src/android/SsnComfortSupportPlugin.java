@@ -55,7 +55,7 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	
 	// Status Types
 	private final static String statusOpenSettingsApp = "settingsAppOpened";
-	private final static String statusNotificationSoundPlayed = "settingsAppOpened";
+	private final static String statusNotificationSoundPlayed = "notificationSoundPlayed";
 	//private final static String statusGetWifiName = "wifiName";
   
 	// Error Types
