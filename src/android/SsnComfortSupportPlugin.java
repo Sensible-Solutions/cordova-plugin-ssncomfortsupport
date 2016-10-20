@@ -251,9 +251,9 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 			});
 			mediaPlayer.start();
 			// Vibrate the device if it has hardware vibrator and permission
-			if (Vibrator.hasVibrator()){
+			Vibrator vib = (Vibrator) cordova.getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+			if (vib.hasVibrator()){
 				if (ContextCompat.checkSelfPermission(cordova.getActivity(), Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED){
-					Vibrator vib = (Vibrator) cordova.getActivity().getSystemService(Context.WIFI_SERVICE);
 					vib.vibrate(1000);
 				}
 			}
