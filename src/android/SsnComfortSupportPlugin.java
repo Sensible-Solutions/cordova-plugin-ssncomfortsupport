@@ -236,22 +236,29 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 		
 		try {
 			mediaPlayer.setDataSource(cordova.getActivity().getApplicationContext(), defaultRingtoneUri);
-		      	mediaPlayer.setAudioStreamType(AudioManager.STREAM_NOTIFICATION);
-		      	mediaPlayer.prepare();
-		      	mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+			mediaPlayer.setAudioStreamType(AudioManager.STREAM_NOTIFICATION);
+			mediaPlayer.prepare();
+			mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 				@Override
 				public void onCompletion(MediaPlayer mp)
 				{
-		 			mp.release();
+					mp.release();
 				}
-     			});
-  			mediaPlayer.start();
-		} catch (Exception e) {
-			/*addProperty(returnObj, keyError, errorPlayNotificationSound);
-			addProperty(returnObj, keyMessage, logPlayNotificationSound);
+			});
+			mediaPlayer.start();
+			// Vibrate the device if it has hardware vibrator and permission
+			if (hasVibrator()){
+				if (ContextCompat.checkSelfPermission(cordova.getActivity(), Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED){
+					Vibrator vib = (Vibrator) cordova.getActivity().getSystemService(Context.WIFI_SERVICE);
+					vib.vibrate(1000);
+				}
+			}
+		} catch (Exception ex) {
+			addProperty(returnObj, keyError, errorPlayNotificationSound);
+			addProperty(returnObj, keyMessage, ex.getMessage());
 			PluginResult pluginResult = new PluginResult(PluginResult.Status.ERROR, returnObj);
 			pluginResult.setKeepCallback(false);
-			callbackContext.sendPluginResult(pluginResult);*/
+			callbackContext.sendPluginResult(pluginResult);
 			return;
 		}
 		addProperty(returnObj, keyStatus, statusNotificationSoundPlayed);
