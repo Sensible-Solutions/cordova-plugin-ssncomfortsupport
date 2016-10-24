@@ -233,7 +233,9 @@ public class SsnComfortSupportPlugin extends CordovaPlugin
 	
 	private void playNotificationSoundAction(JSONArray args, CallbackContext callbackContext)
 	{
-		// Plays the default notification sound (no need to check if notifications are enabled for the app if it is checked before calling this plugin function) 
+		// Plays the default notification sound
+		// Important: there is no check if notifications are enabled for the app so this needs to be checked before calling this plugin function 
+		
 		Uri defaultRingtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 		MediaPlayer mediaPlayer = new MediaPlayer();
 		JSONObject returnObj = new JSONObject();
